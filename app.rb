@@ -1,8 +1,24 @@
 require 'bundler'
 Bundler.require
 
+require './idea'
+
 class IdeaBoxApp <  Sinatra::Base
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  not_found do
+    erb :error
+  end
+  
   get '/' do
-    "Hello, Scoots!"
+    erb :index   
+  end
+
+  post '/' do
+    idea = Idea.new
+    idea.save
+    "Creating an idea!"
   end
 end
