@@ -4,6 +4,8 @@ Bundler.require
 require './idea'
 
 class IdeaBoxApp <  Sinatra::Base
+  set :method_override, true
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -24,6 +26,11 @@ class IdeaBoxApp <  Sinatra::Base
     idea.save
 
     # send user back to index page to see all ideas
+    redirect '/'
+  end
+
+  delete '/:id' do |id|
+    Idea.delete(id.to_i)
     redirect '/'
   end
 end
