@@ -19,7 +19,8 @@
       <% ideas.each_with_index do |idea, id| %>
         <li>
           <%= idea.title %> (<%= id %>)<br />
-          <%= idea.description %>\
+          <%= idea.description %>
+          <a href="/<%= id %>/edit">Edit</a>
           <form action="/<%= id %>" method="POST">
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" value="delete"/>
