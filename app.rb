@@ -19,13 +19,8 @@ class IdeaBoxApp <  Sinatra::Base
   end
 
   post '/' do
-    # create an idea based on form parameters
-    idea = Idea.new(params['idea_title'], params['idea_description'])
-    
-    # store it
+    idea = Idea.new(params[:idea])
     idea.save
-
-    # send user back to index page to see all ideas
     redirect '/'
   end
 
@@ -40,11 +35,7 @@ class IdeaBoxApp <  Sinatra::Base
   end
 
   put '/:id' do |id|
-    data = {
-      :title => params['idea_title'],
-      :description => params['idea_description']
-    }
-    Idea.update(id.to_i, data)
+    Idea.update(id.to_i, params[:idea])
     redirect '/'
   end
 end
